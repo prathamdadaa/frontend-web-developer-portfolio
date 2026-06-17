@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Pratham Dada — Portfolio Stylesheet
+   Theme: terminal / code-editor inspired
+   ========================================================================== */
+
+/* ---------- 1. Tokens / Variables ---------- */
+:root{
+  --bg: #0c0f14;
+  --bg-raised: #11151c;
+  --bg-panel: #151a22;
+  --line: #232b36;
+  --line-soft: #1b212b;
+  --text: #cfd6e0;
+  --text-dim: #7b8694;
+  --text-faint: #4d5663;
+  --amber: #f2a65a;
+  --amber-soft: #f2a65a1a;
+  --green: #5fd68a;
+  --green-soft: #5fd68a1a;
+  --blue: #6ea8fe;
+  --red: #f17171;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Inter', sans-serif;
+  --radius: 10px;
+}
+
+/* ---------- 2. Reset ---------- */
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+a{ color:inherit; text-decoration:none; }
+::selection{ background:var(--amber-soft); color:var(--amber); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+
+/* ---------- 3. Background texture ---------- */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity:0.35;
+  pointer-events:none;
+  z-index:0;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 70%);
+}
+
+/* ---------- 4. Layout shell ---------- */
+.wrap{ max-width:1040px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+/* ---------- 5. Navigation ---------- */
+header.nav{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background:rgba(12,15,20,0.78);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-inner{
+  max-width:1040px; margin:0 auto; padding:14px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.brand{
+  font-family:var(--mono); font-weight:600; font-size:14px; color:var(--text);
+  display:flex; align-items:center; gap:8px;
+}
+.brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); }
+.navlinks{ display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim); }
+.navlinks a{ transition:color .2s; position:relative; }
+.navlinks a:hover, .navlinks a:focus-visible{ color:var(--amber); }
+.navlinks a:focus-visible{ outline:1px dashed var(--amber); outline-offset:4px; }
+.navlinks .num{ color:var(--text-faint); margin-right:2px; }
+@media (max-width:680px){ .navlinks{ display:none; } }
+
+/* ---------- 6. Hero / Terminal ---------- */
+.hero{ padding:72px 0 64px; }
+.terminal{
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+.term-bar{
+  display:flex; align-items:center; gap:8px;
+  padding:12px 16px;
+  background:var(--bg-raised);
+  border-bottom:1px solid var(--line);
+}
+.term-bar .tlights{ display:flex; gap:7px; }
+.term-bar .tlights span{ width:11px; height:11px; border-radius:50%; display:block; }
+.tlights .r{ background:#f17171; } .tlights .y{ background:#f2c14e; } .tlights .g{ background:#5fd68a; }
+.term-title{ font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-left:6px; }
+
+.term-body{ padding:28px 28px 32px; font-family:var(--mono); }
+.term-line{ display:flex; gap:10px; margin-bottom:6px; font-size:14px; flex-wrap:wrap; }
+.prompt{ color:var(--green); flex-shrink:0; }
+.cmd{ color:var(--text); }
+.out{ color:var(--text-dim); padding-left:22px; margin-bottom:14px; font-size:13.5px; }
+
+.hero-name{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size: clamp(32px, 5.6vw, 56px);
+  line-height:1.08;
+  color:#fff;
+  margin: 18px 0 6px;
+  letter-spacing:-0.5px;
+}
+.hero-name .accent{ color:var(--amber); }
+.cursor{ display:inline-block; width:0.5ch; background:var(--amber); margin-left:4px; animation:blink 1s steps(1) infinite; }
+@keyframes blink{ 50%{ opacity:0; } }
+
+.hero-role{
+  font-family:var(--mono); font-size:15px; color:var(--text-dim); margin-bottom:18px;
+}
+.hero-role .tag{ color:var(--blue); }
+
+.hero-desc{ color:var(--text-dim); font-size:15.5px; max-width:560px; margin-bottom:26px; }
+.hero-desc strong{ color:var(--text); font-weight:600; }
+
+.status-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+.pill{
+  font-family:var(--mono); font-size:12px; padding:6px 12px; border-radius:100px;
+  border:1px solid var(--line); color:var(--text-dim); display:flex; align-items:center; gap:6px;
+  background:var(--bg-raised);
+}
+.pill .pdot{ width:6px; height:6px; border-radius:50%; }
+.pill.learn .pdot{ background:var(--amber); }
+.pill.loc .pdot{ background:var(--blue); }
+.pill.goal .pdot{ background:var(--green); }
+
+.cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+.btn{
+  font-family:var(--mono); font-size:13.5px; font-weight:500;
+  padding:12px 20px; border-radius:8px; display:inline-flex; align-items:center; gap:8px;
+  transition: transform .15s, border-color .15s, background .15s;
+  border:1px solid transparent;
+}
+.btn:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
+.btn-primary{ background:var(--amber); color:#1a1206; font-weight:600; }
+.btn-primary:hover{ transform:translateY(-2px); }
+.btn-ghost{ border-color:var(--line); color:var(--text); background:var(--bg-raised); }
+.btn-ghost:hover{ border-color:var(--text-faint); transform:translateY(-2px); }
+
+/* ---------- 7. Section shared styles ---------- */
+section{ padding:64px 0; border-top:1px solid var(--line-soft); }
+.sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; flex-wrap:wrap; }
+.sec-tag{ font-family:var(--mono); font-size:12.5px; color:var(--amber); background:var(--amber-soft); padding:4px 10px; border-radius:6px; }
+.sec-title{ font-family:var(--mono); font-size: clamp(22px,3vw,30px); color:#fff; font-weight:600; }
+.sec-sub{ color:var(--text-dim); font-size:14.5px; margin-top:-26px; margin-bottom:34px; max-width:600px; }
+
+/* ---------- 8. About section ---------- */
+.about-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap:40px; align-items:start; }
+@media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+.about-text p{ color:var(--text-dim); font-size:15.5px; margin-bottom:16px; }
+.about-text strong{ color:var(--text); }
+.about-text .hl{ color:var(--amber); font-weight:600; }
+
+.info-card{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+  font-family:var(--mono); font-size:13.5px; overflow:hidden;
+}
+.info-card .card-head{ padding:10px 16px; background:var(--bg-raised); border-bottom:1px solid var(--line); color:var(--text-faint); font-size:12px; }
+.info-row{ display:flex; justify-content:space-between; padding:11px 16px; border-bottom:1px solid var(--line-soft); gap:12px; }
+.info-row:last-child{ border-bottom:none; }
+.info-key{ color:var(--text-faint); }
+.info-val{ color:var(--text); text-align:right; }
+.info-val.green{ color:var(--green); }
+.info-val.amber{ color:var(--amber); }
+
+/* ---------- 9. Skills section ---------- */
+.skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media (max-width:860px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .skills-grid{ grid-template-columns:1fr; } }
+
+.skill-card{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px; transition:border-color .2s, transform .2s;
+}
+.skill-card:hover{ border-color:var(--text-faint); transform:translateY(-3px); }
+.skill-card-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.skill-card-title{ font-family:var(--mono); font-size:14px; color:#fff; font-weight:600; }
+.skill-status{
+  font-family:var(--mono); font-size:10.5px; padding:3px 8px; border-radius:5px; text-transform:uppercase; letter-spacing:0.04em;
+}
+.skill-status.shipped{ background:var(--green-soft); color:var(--green); }
+.skill-status.learning{ background:var(--amber-soft); color:var(--amber); }
+
+.skill-list{ list-style:none; display:flex; flex-wrap:wrap; gap:8px; }
+.skill-list li{
+  font-family:var(--mono); font-size:12.5px; color:var(--text-dim);
+  background:var(--bg-raised); border:1px solid var(--line-soft); padding:5px 10px; border-radius:6px;
+}
+
+.bar-track{ height:5px; background:var(--bg-raised); border-radius:4px; overflow:hidden; margin-top:14px; }
+.bar-fill{ height:100%; border-radius:4px; background:var(--amber); }
+.skill-card.shipped .bar-fill{ background:var(--green); }
+.bar-label{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:6px; }
+
+/* ---------- 10. Journey / commit-log timeline ---------- */
+.log{ font-family:var(--mono); }
+.commit{
+  display:grid; grid-template-columns: 18px 1fr; gap:18px;
+  padding-bottom:32px; position:relative;
+}
+.commit:last-child{ padding-bottom:0; }
+.commit::before{
+  content:""; position:absolute; left:8px; top:22px; bottom:0; width:1px; background:var(--line);
+}
+.commit:last-child::before{ display:none; }
+.commit-dot{
+  width:17px; height:17px; border-radius:50%; background:var(--bg-panel); border:2px solid var(--amber);
+  margin-top:2px; position:relative; z-index:1; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.commit-dot.done{ border-color:var(--green); }
+.commit-dot.future{ border-color:var(--text-faint); border-style:dashed; }
+.commit-dot .inner{ width:6px; height:6px; border-radius:50%; background:var(--amber); }
+.commit-dot.done .inner{ background:var(--green); }
+.commit-dot.future .inner{ background:var(--text-faint); }
+
+.commit-body{ padding-top:0; }
+.commit-hash{ font-size:12px; color:var(--text-faint); }
+.commit-msg{ color:#fff; font-weight:600; font-size:15px; margin:4px 0 6px; }
+.commit-desc{ color:var(--text-dim); font-size:13.5px; font-family:var(--sans); max-width:560px; }
+.commit-meta{ font-size:11.5px; color:var(--text-faint); margin-top:8px; }
+
+/* ---------- 11. Projects section ---------- */
+.proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+@media (max-width:760px){ .proj-grid{ grid-template-columns:1fr; } }
+.proj-card{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius); padding:22px;
+  transition:border-color .2s, transform .2s; display:flex; flex-direction:column;
+}
+.proj-card:hover{ border-color:var(--text-faint); transform:translateY(-3px); }
+.proj-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.proj-name{ font-family:var(--mono); color:#fff; font-weight:600; font-size:15.5px; }
+.proj-ext{ font-family:var(--mono); font-size:11px; color:var(--text-faint); border:1px solid var(--line); padding:3px 8px; border-radius:5px; }
+.proj-desc{ color:var(--text-dim); font-size:13.8px; margin-bottom:16px; flex-grow:1; }
+.proj-stack{ display:flex; gap:6px; flex-wrap:wrap; }
+.proj-stack span{ font-family:var(--mono); font-size:11px; color:var(--text-dim); background:var(--bg-raised); padding:4px 8px; border-radius:5px; }
+
+/* ---------- 12. Contact section ---------- */
+.contact-box{
+  background:var(--bg-panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:40px; text-align:center;
+}
+.contact-box .sec-title{ margin-bottom:10px; }
+.contact-box p{ color:var(--text-dim); margin-bottom:26px; font-size:15px; }
+.contact-links{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+
+/* ---------- 13. Footer ---------- */
+footer{ padding:32px 0; text-align:center; font-family:var(--mono); font-size:12px; color:var(--text-faint); border-top:1px solid var(--line-soft); }
+footer .heart{ color:var(--amber); }
+
+/* ---------- 14. Scroll-reveal utility ---------- */
+.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+.reveal.in{ opacity:1; transform:translateY(0); }
