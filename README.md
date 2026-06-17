@@ -130,7 +130,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Pratham Dada**
 Dhanbad, Jharkhand, India
-📧 pratham.dada@example.com *(replace with your real email)*
+📧 prathamdadaa@gmail.com *(replace with your real email)*
 
 ---
 
